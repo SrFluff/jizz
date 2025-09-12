@@ -1,0 +1,60 @@
+#!/bin/python3
+version = "1.0.0"
+print("Jizz version " + version)
+
+import os
+
+if not os.path.exists("jizz/"):
+    print("Generating jizz/...")
+    os.system("mkdir jizz")
+
+if not os.path.exists("jizz/config.jizz"):
+    print("WARNING: No jizz/config.jizz file found, generating example one & halting...")
+    f = open("jizz/config.jizz","w")
+    f.write("// Auto-generated config file")
+    f.write("class: project\n")
+    f.write("version: 1.0\n")
+    f.close()
+    exit()
+
+f = open("jizz/config.jizz","r")
+
+buffer = []
+
+for line in f:
+    buffer.append(line.strip())
+f.close()
+jizz_class = "project"
+jizz_version = "1.0"
+
+for i in buffer:
+    if i.split()[0] == "class:":
+        jizz_class = i.split()[1]
+    elif i.split()[0] == "version:":
+        jizz_version = i.split()[1]
+
+print("Variables: \nClass: " + jizz_class + "\nVersion: " + jizz_version)
+
+if not os.path.exists("jizz/man.txt"):
+    print("Generating manifest using config.jizz parameters, this is a one-time thing...")
+    f = open("man.txt","w")
+    f.write("Manifest-Version: " + jizz_version + "\n")
+    f.write("Main-Class: " + jizz_class + "\n")
+    f.close()
+
+print("Running compilation...")
+os.system("javac " + jizz_class + ".java")
+if not os.path.exists(jizz_class + ".class"):
+    print("Compilation check failed! Halting...")
+    exit()
+
+print("Converting class to jar...")
+
+os.system("jar cmvf jizz/man.txt " + jizz_class + ".jar " + jizz_class + ".class")
+
+print("Cleaning up...")
+
+if os.path.exists(jizz_class + ".class"):
+    os.remove(jizz_class + ".class")
+print("Done!")
+exit()
