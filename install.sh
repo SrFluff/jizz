@@ -15,13 +15,13 @@ if [ -e "$APPPATH" ]; then
 	read answer
 	if [ "$answer" == "y" ]; then
 		rm "$APPPATH"
-		mv "jizz" "$PATHAPP"
+		sudo mv "jizz" "$PATHAPP"
 		echo "installed!"
 	else
 		echo "Installation canceled"
 		rm "$APP"
 	fi
 else
-	mv "$APP" "$PATHAPP"
+	sudo mv "$APP" "$PATHAPP"
 
 fi
