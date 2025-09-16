@@ -83,7 +83,7 @@ f.close()
 
 print("Running compilation...")
 os.system("javac " + ".java ".join(jizz_files) + ".java")
-if not os.path.exists(jizz_files[0]  + ".class"):
+if not os.path.exists(jizz_class  + ".class"):
     print("Compilation check failed! Halting...")
     exit()
 
