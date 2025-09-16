@@ -1,5 +1,5 @@
 #!/bin/python3
-version = "1.3.0"
+version = "1.4.0"
 print("+--------------------+")
 print("Jizz version " + version)
 print("+--------------------+")
@@ -51,6 +51,7 @@ f.close()
 jizz_class = "project"
 jizz_version = "1.0"
 jizz_files = ["project", "other_project"]
+jizz_keep_classes = "false"
 
 for i in buffer:
     if i.split()[0] == "class:":
@@ -62,12 +63,21 @@ for i in buffer:
             pass
         else:
             jizz_files = i.split()[1:]
+    elif i.split()[0] == "keep-classes:":
+        if i.split()[1] == "true":
+            jizz_keep_classes = "true"
+        elif i.split()[1] == "false":
+            jizz_keep_classes = "false"
+        else:
+            pass
+
 
 print("+--------------------+")
 print("Variables:")
 print("Class: " + jizz_class)
 print("Version: " + jizz_version)
 print("Files: " + " ".join(jizz_files))
+print("Keep classes: " + jizz_keep_classes)
 print("+--------------------+")
 
 if os.path.exists(".jizz/man.txt"):
@@ -92,8 +102,11 @@ print("Converting class to jar...")
 os.system("jar cmvf .jizz/man.txt " + jizz_class + ".jar " + ".class ".join(jizz_files) + ".class ")
 
 print("Cleaning up...")
-
-if os.path.exists(jizz_class + ".class"):
-    os.system("rm " + ".class ".join(jizz_files) + ".class")
+if jizz_keep_classes == "false":
+    if os.path.exists(jizz_class + ".class"):
+        os.system("rm " + ".class ".join(jizz_files) + ".class")
+        print("Removing class files...")
+else:
+    print("Class files kept...")
 print("Done!")
 exit()
