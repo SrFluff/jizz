@@ -1,7 +1,8 @@
 # jizz
 **WARNING: THIS IS POSIX ONLY**
 ## Installation
-run ```
+run\
+```
 wget "https://raw.githubusercontent.com/SrFluff/jizz/refs/heads/main/install.sh"
 chmod +x install.sh
 ./install.sh
