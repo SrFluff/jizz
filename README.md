@@ -1,5 +1,8 @@
 # jizz
 **WARNING: THIS IS POSIX ONLY**
+## Installation
+run `rm install.sh;wget "https://raw.githubusercontent.com/SrFluff/jizz/refs/heads/main/install.sh";chmod +x install.sh;./install.sh;rm install.sh`
+
 ## What does it do?
 Generates a `jizz/` folder\
 Generates a manifest (`jizz/man.txt`)\
