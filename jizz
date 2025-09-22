@@ -5,9 +5,14 @@ print("Jizz version " + version)
 print("+--------------------+")
 
 import os
-
+import datetime
 classes_exists = False
 class_files = []
+
+def pingTime():
+    current = datetime.datetime.now()
+    time = current.time()
+    return time
 
 for i in os.listdir():
     if ".class" in i:
@@ -31,13 +36,23 @@ if not os.path.exists(".jizz/"):
     print("Generating jizz subdirectory...")
     os.system("mkdir .jizz")
 
+if not os.path.exists(".jizz/logs.txt"):
+    print("Generating log file...")
+    f = open(".jizz/logs.txt","a")
+    f.write(f"[{pingTime()}] Generated log file\n")
+    f.close()
+
 if not os.path.exists(".jizz/config.jizz"):
+    f = open(".jizz/logs.txt","a")
+    f.write(f"[{pingTime()}] jizz config generated\n")
     print("WARNING: No .jizz/config.jizz file found, generating example one & halting...")
     f = open(".jizz/config.jizz","w")
     f.write("// Auto-generated config file\n")
     f.write("class: project\n")
     f.write("version: 1.0\n")
     f.write("files: project other_project\n")
+    f.write("keep-classes: false\n")
+    f.write("auto-run: false\n")
     f.close()
     exit()
 
@@ -52,6 +67,7 @@ jizz_class = "project"
 jizz_version = "1.0"
 jizz_files = ["project", "other_project"]
 jizz_keep_classes = "false"
+jizz_auto_run = "false"
 
 for i in buffer:
     if i.split()[0] == "class:":
@@ -68,8 +84,11 @@ for i in buffer:
             jizz_keep_classes = "true"
         elif i.split()[1] == "false":
             jizz_keep_classes = "false"
-        else:
-            pass
+    elif i.split()[0] == "auto-run:":
+        if i.split()[1] == "true":
+            jizz_auto_run = "true"
+        elif jizz_auto_run == "false":
+            jizz_auto_run = "false"
 
 
 print("+--------------------+")
@@ -78,6 +97,7 @@ print("Class: " + jizz_class)
 print("Version: " + jizz_version)
 print("Files: " + " ".join(jizz_files))
 print("Keep classes: " + jizz_keep_classes)
+print("Auto run: " + jizz_auto_run)
 print("+--------------------+")
 
 if os.path.exists(".jizz/man.txt"):
@@ -95,11 +115,17 @@ print("Running compilation...")
 os.system("javac " + ".java ".join(jizz_files) + ".java")
 if not os.path.exists(jizz_class  + ".class"):
     print("Compilation check failed! Halting...")
+    f = open(".jizz/logs.txt","a")
+    f.write(f"[{pingTime()}] Compilation check failed, program halted\n")
+    f.close()
     exit()
 
 print("Converting class to jar...")
 
 os.system("jar cmvf .jizz/man.txt " + jizz_class + ".jar " + ".class ".join(jizz_files) + ".class ")
+f = open(".jizz/logs.txt","a")
+f.write(f"[{pingTime()}] Program jar'd successfully\n")
+f.close()
 
 print("Cleaning up...")
 if jizz_keep_classes == "false":
@@ -109,4 +135,6 @@ if jizz_keep_classes == "false":
 else:
     print("Class files kept...")
 print("Done!")
+if jizz_auto_run == "true":
+    os.system("clear;java -jar " + jizz_class + ".jar")
 exit()

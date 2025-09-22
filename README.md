@@ -17,20 +17,23 @@ Compiles using javac\
 Compresses it into a jar
 ## How to config
 The config takes four parameters
-|parameter|default|about|
+
+|parameter   |default              |about                                                                     |
 |------------|---------------------|--------------------------------------------------------------------------|
 |class       |project              |The main class of your project                                            |
 |version     |1.0                  |The version of your project                                               |
 |files       |project other_project|The files that will be compiled, seperated by spaces                      |
 |keep-classes|false                |Whether or not, at the end of compilation, jizz removes all `.class` files|
+|auto-run    |false                |Whether or not, after compilation, jizz runs the compiled `.jar` file     |
 
 This is the syntax
 
 ```
-class: <your .java file, minus the .java>
+class: <your main class>
 version: <duh>
 files: <A list of .java files, minus the .java>
 keep-classes: <true or false>
+auto-run: <true or false>
 // Comments go like this
 ```
 
