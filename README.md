@@ -1,6 +1,9 @@
 # jizz
 **WARNING: THIS IS POSIX ONLY**
 
+**`JAVAC` AND `JAR` ARE REQUIERED**\
+**THIS IS NOT A REPLACEMENT COMPILER**
+
 ## What does it do?
 Generates a `jizz/` folder\
 Generates a manifest (`jizz/man.txt`)\
@@ -14,7 +17,7 @@ The config takes four parameters
 |------------|---------------------|--------------------------------------------------------------------------|
 |class       |project              |The main class of your project                                            |
 |version     |1.0                  |The version of your project                                               |
-|files       |project other_project|The files that will be compiled, seperated by spaces                      |
+|files       |*                    |The files that will be compiled, seperated by spaces                      |
 |keep-classes|false                |Whether or not, at the end of compilation, jizz removes all `.class` files|
 |auto-run    |false                |Whether or not, after compilation, jizz runs the compiled `.jar` file     |
 

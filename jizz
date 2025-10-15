@@ -1,5 +1,5 @@
 #!/bin/python3
-version = "1.5.0"
+version = "1.6.0"
 print("+--------------------+")
 print("Jizz version " + version)
 print("+--------------------+")
@@ -8,6 +8,26 @@ import os
 import datetime
 classes_exists = False
 class_files = []
+flag_for_death = False
+
+print(f"java installed:  {os.path.exists('/bin/java')}")
+print(f"javac installed: {os.path.exists('/bin/javac')}")
+print(f"jar installed:   {os.path.exists('/bin/jar')}")
+
+if not os.path.exists('/bin/java'):
+    flag_for_death = True
+    print("[!] Java not found...is it installed?")
+
+if not os.path.exists('/bin/javac'):
+    flag_for_death = True
+    print("[!] Java compiler not found...is it installed?")
+
+if not os.path.exists('/bin/jar'):
+    flag_for_death = True
+    print("[!] Java jar util not found...is it installed?")
+
+if flag_for_death:
+    exit()
 
 def pingTime():
     current = datetime.datetime.now()
@@ -65,7 +85,7 @@ for line in f:
 f.close()
 jizz_class = "project"
 jizz_version = "1.0"
-jizz_files = ["project", "other_project"]
+jizz_files = ["*"]
 jizz_keep_classes = "false"
 jizz_auto_run = "false"
 
@@ -114,7 +134,7 @@ f.close()
 print("Running compilation...")
 os.system("javac " + ".java ".join(jizz_files) + ".java")
 if not os.path.exists(jizz_class  + ".class"):
-    print("Compilation check failed! Halting...")
+    print("[!] Compilation check failed! Halting...")
     f = open(".jizz/logs.txt","a")
     f.write(f"[{pingTime()}] Compilation check failed, program halted\n")
     f.close()
