@@ -1,4 +1,5 @@
 # jizz
+![icon](https://files.catbox.moe/9nf7u9.png)
 **WARNING: THIS IS POSIX ONLY**
 
 **`JAVAC` AND `JAR` ARE REQUIERED**\
