@@ -1,4 +1,4 @@
-# jizz <img src="https://files.catbox.moe/9nf7u9.png" width="100" height="auto">
+<img src="https://files.catbox.moe/9nf7u9.png" width="100" height="auto"> # Jizz
 **WARNING: THIS IS POSIX ONLY**
 
 **`JAVAC` AND `JAR` ARE REQUIERED**\
