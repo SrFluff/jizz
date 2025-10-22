@@ -70,7 +70,7 @@ if not os.path.exists(".jizz/config.jizz"):
     f.write("// Auto-generated config file\n")
     f.write("class: project\n")
     f.write("version: 1.0\n")
-    f.write("files: project other_project\n")
+    f.write("files: *\n")
     f.write("keep-classes: false\n")
     f.write("auto-run: false\n")
     f.close()
