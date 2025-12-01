@@ -1,5 +1,6 @@
 #!/bin/python3
-version = "1.6.0"
+
+version = "1.7.0"
 print("+--------------------+")
 print("Jizz version " + version)
 print("+--------------------+")
@@ -27,6 +28,7 @@ if not os.path.exists('/bin/jar'):
     print("[!] Java jar util not found...is it installed?")
 
 if flag_for_death:
+    print("[!] Flagged for death, halting...")
     exit()
 
 def pingTime():
@@ -48,7 +50,8 @@ if classes_exists:
 if os.path.exists("jizz/"):
     print("Legacy jizz directory found, migrating...")
     os.system("mkdir .jizz")
-    os.system("cp jizz/config.jizz .jizz/")
+    if os.path.exists("jizz/config.jizz"):
+        os.system("cp jizz/config.jizz .jizz/")
     print("Removing legacy jizz directory...")
     os.system("rm -rf jizz/")
 
@@ -90,7 +93,9 @@ jizz_keep_classes = "false"
 jizz_auto_run = "false"
 
 for i in buffer:
-    if i.split()[0] == "class:":
+    if len(i.split()) == 0:
+        pass
+    elif i.split()[0] == "class:":
         jizz_class = i.split()[1]
     elif i.split()[0] == "version:":
         jizz_version = i.split()[1]
