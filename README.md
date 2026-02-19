@@ -1,4 +1,3 @@
-<img src="https://files.catbox.moe/9nf7u9.png" width="100" height="auto"><p></p>
 # Jizz
 **WARNING: THIS IS POSIX ONLY**
 
